@@ -23,14 +23,14 @@ function [sys_model] = SystemID(A, free, forced, M1, M2)
     [wn2,~,~] = log_decrement_free(free.t2, free.x2, free.tend2, 0);
     [m, c, k] = param_solve(wn1, wn2, M1, M2, zeta);
     wn = wn1;
-    sys_model.log_decrement = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'model', model);
+    sys_model.ld = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'model', model);
 
     %	curve fit
     [wn1,zeta,model] = curve_fit_free(free.t1, free.x1, free.tend1, 2);
     [wn2,~,~] = curve_fit_free(free.t2, free.x2, free.tend2, 0);
     [m, c, k] = param_solve(wn1, wn2, M1, M2, zeta);
     wn = wn1;
-    sys_model.free_curve_fit = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'model', model);
+    sys_model.fcfit = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'model', model);
 
     % analyze step responses:
 
@@ -56,5 +56,5 @@ function [sys_model] = SystemID(A, free, forced, M1, M2)
     [m, c, k] = param_solve(wn1, wn2, M1, M2, zeta);
     wn = wn1;
     K_hw_ol = forced.x1(end)*k/A;
-    sys_model.step_curve_fit = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'K_hw_ol', K_hw_ol, 'model', model);
+    sys_model.scfit = struct('m', m, 'c', c, 'k', k, 'wn', wn, 'zeta', zeta, 'K_hw_ol', K_hw_ol, 'model', model);
 end
