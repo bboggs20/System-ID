@@ -1,5 +1,5 @@
 % curve fit
-function [wn, zeta, model] = curve_fit_free(t,x,tend,plt)
+function [x0, wn, zeta, model] = curve_fit_free(t,x,tend,plt)
 
 	[~, locs] = findpeaks(x(1:tend));
 	free = [t(locs(1):end)-t(locs(1)), x(locs(1):end)];
