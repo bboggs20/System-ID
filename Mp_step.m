@@ -29,7 +29,7 @@ function [wn, zeta, model] = Mp_step(t,x,tend,plt)
 
 	pt = "Step Response: % Max Overshoot Method";
 	if plt > 0
-		mplot(plt, model, pt, t, forced(:,2), locs);
+		mplot(plt, model, pt, t, forced(:,2), locs(1));
 		plot(t, xss.*ones(size(t)), 'k--', 'HandleVisibility', 'off');
 	end
 end

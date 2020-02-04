@@ -11,7 +11,7 @@ function [wn, zeta, model] = tr_step(t,x,tend,plt)
 
     [~, wd, ~] = period(forced(locs,1), length(locs));
     
-    phi = pi-tr*wd;
+    phi = pi-(tr*wd);
 	zeta = sqrt(1/(tan(phi)^2+1));
 	wn = wd/sqrt(1-zeta^2);
 	sigma = zeta*wn;
@@ -20,7 +20,7 @@ function [wn, zeta, model] = tr_step(t,x,tend,plt)
 
 	pt = "Step Response: Rise Time Method";
 	if plt > 0
-		mplot(plt, model, pt, t, x, locs);
+		mplot(plt, model, pt, t, x, []);
 		plot(t, xss.*ones(size(t)), 'k--', 'HandleVisibility', 'off');
 	end
 end
